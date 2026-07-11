@@ -43,6 +43,7 @@
             <li><a href="#about">關於</a></li>
             <li><a href="#projects">作品</a></li>
             <li><a href="#skills">技能</a></li>
+            <li><a href="#random-dog">隨機狗狗</a></li>
             <li><a href="#experience">經歷</a></li>
           </ul>
         </nav>
@@ -257,6 +258,50 @@
         </div>
       </section>
 
+      <section id="random-dog" class="section section-dog">
+        <div class="container">
+          <header class="section-header section-header--center reveal">
+            <p class="section-label">Fun</p>
+            <h2>隨機狗狗</h2>
+            <p class="section-lead">
+              點一下按鈕，從 Dog CEO API 載入一張可愛的狗狗照片。
+            </p>
+          </header>
+
+          <div class="dog-widget reveal">
+            <div
+              class="dog-display"
+              id="dog-display"
+              aria-live="polite"
+              aria-busy="false"
+            >
+              <p class="dog-placeholder" id="dog-placeholder">
+                還沒有照片，來抽一張吧！
+              </p>
+              <div class="dog-loading" id="dog-loading" hidden>
+                <span class="dog-loading__spinner" aria-hidden="true"></span>
+                <span class="dog-loading__text">載入中…</span>
+              </div>
+              <img
+                class="dog-image"
+                id="dog-image"
+                alt=""
+                hidden
+              />
+              <p class="dog-error" id="dog-error" hidden role="alert"></p>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn--primary"
+              id="random-dog-btn"
+            >
+              隨機狗狗
+            </button>
+          </div>
+        </div>
+      </section>
+
       <section id="experience" class="section section-experience">
         <div class="container">
           <header class="section-header reveal">
@@ -318,7 +363,7 @@
             <p class="section-label">Contact</p>
             <h2>一起把下一個想法<br />變成上線的產品。</h2>
             <p class="section-lead">
-              無論是作品集、品牌官網或互動原型，都歡迎與我聯繫。
+              無論是作品集、品牌官網或互動原型，都歡迎與我聯繫喔。
             </p>
           </div>
           <div class="cta-banner__actions">
@@ -345,6 +390,7 @@
             <li><a href="#about">關於</a></li>
             <li><a href="#projects">作品</a></li>
             <li><a href="#skills">技能</a></li>
+            <li><a href="#random-dog">隨機狗狗</a></li>
             <li><a href="#experience">經歷</a></li>
           </ul>
         </nav>

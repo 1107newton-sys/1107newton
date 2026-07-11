@@ -149,6 +149,77 @@
     }
   }
 
+  function initRandomDog() {
+    const DOG_API = "https://dog.ceo/api/breeds/image/random";
+    const btn = document.getElementById("random-dog-btn");
+    const display = document.getElementById("dog-display");
+    const placeholder = document.getElementById("dog-placeholder");
+    const loading = document.getElementById("dog-loading");
+    const image = document.getElementById("dog-image");
+    const errorEl = document.getElementById("dog-error");
+
+    if (!btn || !display || !loading || !image || !errorEl) return;
+
+    function setLoading(isLoading) {
+      display.setAttribute("aria-busy", String(isLoading));
+      btn.disabled = isLoading;
+      loading.hidden = !isLoading;
+
+      if (isLoading) {
+        if (placeholder) placeholder.hidden = true;
+        errorEl.hidden = true;
+        image.hidden = true;
+        image.classList.remove("is-loaded");
+      }
+    }
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.hidden = false;
+      if (placeholder) placeholder.hidden = true;
+      image.hidden = true;
+      image.classList.remove("is-loaded");
+    }
+
+    async function fetchRandomDog() {
+      setLoading(true);
+
+      try {
+        const response = await fetch(DOG_API);
+        if (!response.ok) {
+          throw new Error("無法取得狗狗照片，請稍後再試。");
+        }
+
+        const data = await response.json();
+        if (data.status !== "success" || !data.message) {
+          throw new Error("API 回傳格式異常，請再試一次。");
+        }
+
+        await new Promise(function (resolve, reject) {
+          image.onload = resolve;
+          image.onerror = function () {
+            reject(new Error("圖片載入失敗，請再試一次。"));
+          };
+          image.src = data.message;
+          image.alt = "隨機狗狗照片";
+        });
+
+        setLoading(false);
+        errorEl.hidden = true;
+        if (placeholder) placeholder.hidden = true;
+        image.hidden = false;
+        requestAnimationFrame(function () {
+          image.classList.add("is-loaded");
+        });
+      } catch (err) {
+        setLoading(false);
+        showError(err instanceof Error ? err.message : "發生未知錯誤。");
+      }
+    }
+
+    btn.addEventListener("click", fetchRandomDog);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initTheme();
     if (themeToggle) {
@@ -158,5 +229,6 @@
     initSmoothScroll();
     initReveal();
     initYear();
+    initRandomDog();
   });
 })();
